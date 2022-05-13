@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<skipper version="3.2.36.1775" mvc="Symfony" orm="Doctrine2" name="Test1" uuid="2d4186e9-8ff5-43bf-aea1-cd9b63488891">
+  <module name="\src/Entity" local-name="src/Entity" namespace="\App\Entity" local-namespace="\App\Entity" export-format="Doctrine2Php" export-path="src/Entity" uuid="539ef458-0f22-4806-b224-0c9180ed1f5a">
+    <entity name="\App\Entity\Annonces" local-name="Annonces" namespace="\App\Entity" uuid="425bb8cc-3432-467f-9657-72f8bfe327b5">
+      <field name="id" type="integer" required="true" primary="true" uuid="264134fa-c7f9-493d-bab0-1fed7086d51b">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="title" type="string" size="255" required="true" uuid="ff8624be-c274-4556-9398-12d9e18c3684"/>
+      <field name="content" type="text" required="true" uuid="292624ea-9d4a-4799-a47e-21405858dd78"/>
+      <field name="created_at" type="datetime_immutable" required="true" uuid="1ef7126a-2ea7-4fba-bb6c-5367971606bb"/>
+      <field name="active" type="boolean" required="true" uuid="b4b75919-0913-4d64-94c5-6c292aa98e7c"/>
+      <field name="image" type="string" size="255" uuid="0381869e-8b94-475b-9be5-eef0060fa571"/>
+      <field name="prix" type="float" required="true" uuid="27d51af1-2992-42b4-926f-ca8c1c7c4702"/>
+      <field name="users_id" required="true" uuid="36afc35b-f058-4d58-9080-ae6696dde5c4"/>
+      <field name="categories_id" required="true" uuid="8a7dde2f-9600-4321-bb44-b73727b87185"/>
+      <index name="" uuid="1ae79018-fdf9-479a-b7db-9ab2815474aa">
+        <index-field name="title" uuid="4dc0b9a9-f75d-4524-82e9-012abec6340c"/>
+        <index-field name="content" uuid="90891184-8a16-44c9-bc05-d7e5155f4b1f"/>
+        <orm-attributes>
+          <attribute name="flags">
+            <attribute name="fulltext">true</attribute>
+          </attribute>
+        </orm-attributes>
+      </index>
+      <orm-attributes>
+        <attribute name="repository-class">App\Entity\AnnoncesRepository</attribute>
+        <attribute name="table">annonces</attribute>
+        <attribute name="export-file-name">Annonces.php</attribute>
+        <attribute name="Gedmo">
+          <attribute name="Sluggable">
+            <attribute name="Slug">slug</attribute>
+            <attribute name="Fields">
+              <attribute name="Field">title</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="Timestampable">
+            <attribute name="Fields">
+              <attribute name="Field">
+                <attribute name="Name">created_at</attribute>
+                <attribute name="On">create</attribute>
+              </attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Annonces" to="\App\Entity\Users" owner-alias="annonces" inverse-alias="users" many-owner="true" many-inverse="false" parent-required="true" uuid="125be9f7-f738-404e-9492-c13863033b0d">
+      <association-field from="users_id" to="id" uuid="fe941e74-7738-46ab-a1bf-692e39d8d326"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\Annonces" to="\App\Entity\Categories" owner-alias="annonces" inverse-alias="categories" many-owner="true" many-inverse="false" parent-required="true" uuid="88a24c2b-951f-46c5-85bc-d5b1bb32a278">
+      <association-field from="categories_id" to="id" uuid="1c07b290-4bee-45d9-88db-4a88b743d9ab"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\App\Entity\Categories" local-name="Categories" namespace="\App\Entity" uuid="4738c8fd-48b0-46a9-b9d9-fe50959f30e8">
+      <field name="id" type="integer" required="true" primary="true" uuid="394d6d54-71c9-4b87-be0e-3bb26568e37d">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" type="string" size="100" required="true" uuid="8b3055d5-ce61-4e0d-a81c-b967a8e22eb5"/>
+      <field name="parent_id" uuid="91ccdb02-9a72-4769-81c8-ec5951bfea87"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Entity\CategoriesRepository</attribute>
+        <attribute name="export-file-name">Categories.php</attribute>
+        <attribute name="Gedmo">
+          <attribute name="Sluggable">
+            <attribute name="Slug">slug</attribute>
+            <attribute name="Fields">
+              <attribute name="Field">name</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Categories" to="\App\Entity\Categories" owner-alias="categories" inverse-alias="parent" many-owner="true" many-inverse="false" uuid="de481ea3-d52d-461e-ac90-bc29232d6da3">
+      <association-field from="parent_id" to="id" uuid="6f2fed74-42be-40a8-856b-79f4ea795bec"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\App\Entity\Comments" local-name="Comments" namespace="\App\Entity" uuid="e09ba420-5218-4efb-a47c-fb146f51962b">
+      <field name="id" type="integer" required="true" primary="true" uuid="9262f4ad-900a-4075-a1e7-e088909b218b">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="content" type="text" required="true" uuid="8a1ba731-aadc-46fa-95a8-8f07495d3825"/>
+      <field name="active" type="boolean" required="true" uuid="9e801eba-8e77-4a59-b5e9-35bff1adcbe0"/>
+      <field name="email" type="string" size="255" required="true" uuid="992caadf-2dc0-4d00-86d0-d305ee493df2"/>
+      <field name="nickname" type="string" size="255" required="true" uuid="38484fdd-34f2-4b1a-80eb-9f7d73bff3e3"/>
+      <field name="created_at" type="datetime_immutable" required="true" uuid="65ebfc3e-3416-435e-bbad-e92a76fa344c"/>
+      <field name="rgpd" type="boolean" required="true" uuid="09ffa4f2-f022-4814-8bea-10423bc7ed7a"/>
+      <field name="parent" type="integer" uuid="70c7cbff-def3-4004-93bd-7489103f9915"/>
+      <field name="annonces_id" required="true" uuid="f559453a-96d9-49f2-9fc6-ed3d7244b26f"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Entity\CommentsRepository</attribute>
+        <attribute name="export-file-name">Comments.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Comments" to="\App\Entity\Annonces" owner-alias="comments" inverse-alias="annonces" many-owner="true" many-inverse="false" parent-required="true" uuid="7501e681-2685-42e1-ae58-ea636ad5598e">
+      <association-field from="annonces_id" to="id" uuid="6a4e7a80-f740-44bb-b5ca-68a0de713a75"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <entity name="\App\Entity\ResetPasswordRequest" local-name="ResetPasswordRequest" namespace="\App\Entity" uuid="3d3e2ce3-400e-42b6-92b9-68101f9d3538">
+      <field name="id" type="integer" required="true" primary="true" uuid="f74bdb7d-e678-4bbe-a6ed-2f9efc8a4c56">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="user_id" required="true" uuid="40275de9-acca-4bb4-94d8-5024c01e1145"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Entity\ResetPasswordRequestRepository</attribute>
+        <attribute name="export-file-name">ResetPasswordRequest.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\ResetPasswordRequest" to="\App\Entity\Users" owner-alias="" inverse-alias="user" many-owner="true" many-inverse="false" parent-required="true" uuid="053a465e-fd91-43dc-a5f7-c0ce7267308b">
+      <association-field from="user_id" to="id" uuid="db7a406a-347e-4f0f-a0a7-a838949fe2c7"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\App\Entity\Users" local-name="Users" namespace="\App\Entity" uuid="73a489e2-aece-451f-ae6c-9c684b16599d">
+      <field name="id" type="integer" required="true" primary="true" uuid="058ef935-c287-495d-a3f6-70ded93888a6">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="email" type="string" size="180" required="true" unique="true" uuid="c284bc70-2e3f-4f99-a44b-3ea0305d23d3"/>
+      <field name="roles" type="json" required="true" uuid="54c0faac-08a5-41d9-9ff3-5e87d55c4e55"/>
+      <field name="password" type="string" required="true" uuid="32ed514c-3d44-41ce-8b30-263882718b09"/>
+      <field name="isVerified" type="boolean" required="true" uuid="4ec52949-e892-45c9-97b5-8dd90bd0bdf1"/>
+      <field name="name" type="string" size="100" required="true" uuid="eb54be1d-0f18-4086-b28d-c12a5bd608a9"/>
+      <field name="firstname" type="string" size="100" required="true" uuid="cdf18f86-a9cc-4d28-9fbc-a5ec8618943b"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Entity\UsersRepository</attribute>
+        <attribute name="export-file-name">Users.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <visual-data>
+    <association uuid="053a465e-fd91-43dc-a5f7-c0ce7267308b" color="#B31F24"/>
+    <association uuid="125be9f7-f738-404e-9492-c13863033b0d" color="#0A783D"/>
+    <association uuid="7501e681-2685-42e1-ae58-ea636ad5598e" color="#F4931F"/>
+    <association uuid="88a24c2b-951f-46c5-85bc-d5b1bb32a278" color="#61D351"/>
+    <association uuid="de481ea3-d52d-461e-ac90-bc29232d6da3" color="#CDC32B"/>
+    <entity uuid="3d3e2ce3-400e-42b6-92b9-68101f9d3538" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="349" position-y="333" size-x="0" size-x2="114" size-y="0" size-y2="45"/>
+    <entity uuid="425bb8cc-3432-467f-9657-72f8bfe327b5" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="162" size-y="0" size-y2="157"/>
+    <entity uuid="4738c8fd-48b0-46a9-b9d9-fe50959f30e8" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="359" position-y="37" size-x="0" size-x2="101" size-y="0" size-y2="73"/>
+    <entity uuid="73a489e2-aece-451f-ae6c-9c684b16599d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="42" position-y="337" size-x="0" size-x2="118" size-y="0" size-y2="115"/>
+    <entity uuid="e09ba420-5218-4efb-a47c-fb146f51962b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="298" position-y="151" size-x="0" size-x2="162" size-y="0" size-y2="143"/>
+    <module uuid="539ef458-0f22-4806-b224-0c9180ed1f5a" bg-color="#FEFCE8" position-x="50" position-y="50" size-x="0" size-x2="484" size-y="0" size-y2="492"/>
+    <project uuid="2d4186e9-8ff5-43bf-aea1-cd9b63488891" size-x="0" size-x2="586" size-y="0" size-y2="593"/>
+  </visual-data>
+</skipper>

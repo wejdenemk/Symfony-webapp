@@ -1,0 +1,22 @@
+{% extends 'baseU.html.twig' %}
+
+{% block title %}annonces{% endblock %}
+
+{% block body %}
+
+{% for categorie in categories %}
+<center class="container">
+<div class="card shadow-1 rounded-3" margin-left="0px" >
+  <div class="card-header">{{ categorie.name }}</div>
+  <div class="card-content">
+    <p>
+       {{ categorie.slug }} 
+   </p>
+  </div>
+  <div class="divider"></div>
+  <a href="{{ path("useran")}}" >Card footer</a>
+</div>
+</center>
+{% endfor %}
+
+{% endblock %}

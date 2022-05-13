@@ -1,0 +1,108 @@
+{% extends 'baseA2.html.twig' %}
+
+{% block title %}Client{% endblock %}
+
+{% block body %}
+
+ {% for message in app.flashes('message') %}
+ <br>
+         <div class="card-body">
+										<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+											<span class="badge badge-pill badge-primary">Success</span>
+											{{ message }}
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+    {% endfor %}
+
+              
+<br>
+ <!-- MAIN CONTENT-->
+              <div class="section__content section__content--p30">
+                <h3 class="title-5 m-b-35">Client table</h3>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="table-responsive table--no-card m-b-30">
+                          
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>firstname</th>
+                                                <th>name</th>
+                                                <th class="text-right">Email</th>
+                                                <th class="text-right">verified</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for user in users %}
+                                            <tr>
+                                                <td>{{ user.id }}</td>
+                                                <td>{{ user.firstname }}</td>
+                                                <td>{{ user.name }}</td>
+                                                <td class="text-right">{{ user.email }}</td>
+                                                <td class="text-right">
+                                                     <label class="switch switch-3d switch-primary mr-3">
+                                                      <input type="checkbox" class="switch-input" {{ (user.isVerified) ? 'checked':''}} data-id="{{user.id}}" />
+                                                      <span class="switch-label"></span>
+                                                      <span class="switch-handle"></span>
+                                                    </label>
+                                                    </td>  
+                                                  
+                                            </tr>
+                                          {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">
+                                    <div class="au-card-inner">
+                                        <div class="table-responsive">
+                                            <table class="table table-top-countries">
+                                                <tbody>
+                                                <tr>
+                                                        <td></td>
+                                                        <td class="text-right"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="text-right"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Admins</td>
+                                                        <td class="text-right">1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Clients</td>
+                                                        <td class="text-right">6</td>
+                                                    </tr>
+                                                   <tr>
+                                                        <td></td>
+                                                        <td class="text-right"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="text-right"></td>
+                                                    </tr>
+                                                    <tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+ 
+
+{% endblock %}
+
+

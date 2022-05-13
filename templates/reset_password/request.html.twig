@@ -1,0 +1,44 @@
+{% extends 'baseS.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+<div class="page-wrapper">
+        <div class="page-content--bge5">
+            <div class="container">
+                <div class="login-wrap">
+                    <div class="login-content">
+                        <div class="login-logo">
+                            <a href="#">
+                                <img src="images/icon/logo.png" alt="CoolAdmin">
+                            </a>
+                        </div>
+
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <h1 class="h3 mb-3 font-weight-normal"><center>Reset your password</center></h1>
+                            
+
+    {{ form_start(requestForm) }}
+    <div class="container">
+        {{ form_row(requestForm.email) }}
+    <div>
+        <div>
+            <small>
+                Enter your email address and we will send you a
+                link to reset your password.
+            </small>
+        </div>
+   
+   <br> 
+        <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Send password reset email</button>
+               
+    {{ form_end(requestForm) }}
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

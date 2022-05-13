@@ -1,0 +1,111 @@
+{% extends 'baseA2.html.twig' %}
+
+{% block title %}Announces{% endblock %}
+
+{% block body %}
+
+ {% for message in app.flashes('message') %}
+ <br>
+    <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+											<span class="badge badge-pill badge-success">Success</span>
+											{{ message }}
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>   
+    {% endfor %}
+
+
+
+
+<br>
+<div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">Annonces table</h3>
+                                <div class="table-data__tool">
+                                    
+                                    <div class="table-data__tool-right">
+                                    <div class="container">
+                                           <a type="button" href="{{path("adminAn_ajoutAn")}}"  class="btn btn-warning btn-sm"><i class="zmdi zmdi-plus"></i>Add Annonce</a>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <th>ID</th>
+                                                <th>Titre</th>
+                                                 <th>Date</th>
+                                                <th>Active</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                         {% for annonce in app.user.annonces %}
+                                        <tbody>
+                                            <tr class="tr-shadow">
+                                                <td>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </td>
+                                                <td>{{ annonce.id }}</td>
+        
+                                                <td class="desc">{{ annonce.title }}</td>
+
+                                                <td>
+                                                    <span class="status--process">{{ annonce.createdAt|date }}</span>
+                                                </td>
+
+                                                <td>
+                                                   <label class="switch switch-3d switch-warning mr-3">
+                                                    <input type="checkbox" class="switch-input" {{ (annonce.active) ? 'checked':''}} data-id="{{annonce.id}}" />
+                                                    <span class="switch-label"></span>
+                                                    <span class="switch-handle"></span>
+                                                  </label>
+                                                </td>
+                                                
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                    
+                                                        <a href="{{path("adminAn_modifAn",{id:annonce.id})}}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                        <i class="zmdi zmdi-edit"></i>
+                                                        </a>
+        
+                                                        
+
+                                                      <a href="{{ path("admin_supprimer",{id:annonce.id})}}" class="item" data-toggle="tooltip" data-placement="top" title="Delete" 
+                                                      data-target="modal-delete" data-id="{{annonce.id}}"
+                                                      data-titre="{{annonce.title}}"><i class="zmdi zmdi-delete"></i></a>
+
+
+
+                                                        <a href="{{ path("adminAn_activer",{id:annonce.id})}}" class="item" data-toggle="tooltip" data-placement="top" title="More"
+                                                         data-id="{{annonce.id}}"
+                                                        data-titre="{{annonce.title}}">
+                                                            <i class="zmdi zmdi-more"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>
+
+
+
+
+{% endblock %}

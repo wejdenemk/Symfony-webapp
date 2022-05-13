@@ -1,0 +1,110 @@
+{% extends 'baseNewPa.html.twig' %}
+
+{% block title %}Chart{% endblock %}
+
+{% block body %}
+
+{% for flashError in app.flashes ('message') %}
+<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+{% endfor %}
+<!-- inner page section -->
+      <section class="inner_page_head">
+         <div class="container_fuild">
+            <div class="row">
+               <div class="col-md-12">
+                  
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end inner page section -->
+      
+ <!-- inner page section -->
+     <section class="product_section layout_padding">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2>
+                  Your <span>Chart</span>
+               </h2>
+        
+         </div>
+      </section>
+      <!-- end inner page section -->
+      <!-- why section -->
+      <section class="why_section layout_padding">
+         <div class="container">
+         
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <div class="full">
+
+{% if items | length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th colspan="2">Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <div style="width: 50px;">
+                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 50px; background-color: rgb(233, 236, 239);">
+                            {#<img src="{{ item.annonce.image }}">#}
+                            </div>
+                        </div>
+                        <br>
+                    </td>
+                    <td>{{ item.annonce.title }}</td>
+                    <td>{{ item.annonce.prix }} DT</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.annonce.prix * item.quantity }} DT</td>
+                    <td>
+                        <a href="{{ path('removetest',{'id': item.annonce.id})}}" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i>
+                    </a>
+
+                    <a href="{{ path('remove',{'id': item.annonce.id})}}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-cart-plus">-</i>
+                    </a>
+
+                    <a href="{{ path('addtest3',{'id': item.annonce.id})}}" class="btn btn-success btn-sm">
+                    <i class="bi bi-cart-plus">+</i>
+                    </a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr><td></td>
+                <td colspan="3" class="text-right">Total :</td>
+                <td>{{ total }} DT</td>
+                <td> <a href="{{ path('deleteAll')}}" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i>
+                    </a></td>
+            </tr>
+        </tfoot>
+    </table>
+{% else %}
+<section class="product_section layout_padding">
+    <div class="btn-box">
+                     <h5>Your Chart Is Empty Buddy :"(</h5>
+                  </div></section>
+{% endif %}
+                     
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end why section -->
+     
+{% endblock %}

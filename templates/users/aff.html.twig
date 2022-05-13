@@ -1,0 +1,61 @@
+{% extends 'baseU.html.twig' %}
+
+{% block title %}user{% endblock %}
+
+{% block body %}
+                          <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">data table</h3>
+                                <div class="table-data__tool">
+                                            <ul class="nav nav-pills">
+											<li class="nav-item">
+												<a class="nav-link active" href="{{ path('users_')}}">All</a>
+											</li>
+											<li class="nav-item dropdown">
+												<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Select</a>
+												<div class="dropdown-menu">
+                                                {% for categorie in categories %}
+													<a class="dropdown-item" href="{{ path('filterU', {'id': categorie.id } )}}">{{ categorie.name }}</a>
+												{% endfor %}
+													<div class="dropdown-divider"></div>
+													<a class="dropdown-item" href="#">Separated link</a>
+												</div>
+											</li>
+										</ul>
+                                    </div>
+                                </div>
+									<br><br>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<div class="container">
+    <div class="row clearfix">
+    {% for annonce in annonces %}
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="card product_item">
+                <div class="body">
+                    <div class="cp_img">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Product" class="img-fluid">
+                        <div class="hover">
+                            <a href="javascript:void(0);" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-plus"></i></a>
+                            <a href="{{ path('addtest',{'id':annonce.id})}}" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-shopping-cart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product_details">
+                        <h5><a href="{{ path('showU',{'id':annonce.id})}}">Simple Black Clock</a></h5>
+                        <ul class="product_price list-unstyled">
+                            <li class="old_price">$16.00</li>
+                            <li class="new_price">$13.00</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    </div>
+</div>
+</div></div></div></div></div>
+
+
+{% endblock %}

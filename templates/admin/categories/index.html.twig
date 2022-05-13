@@ -1,0 +1,99 @@
+{% extends 'baseA2.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+
+
+{% for message in app.flashes('message') %}
+<br>
+         <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+											<span class="badge badge-pill badge-success">Success</span>
+											{{ message }}
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+
+    {% endfor %}
+  
+
+<br>
+<div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">Categories table</h3>
+                                <div class="table-data__tool">
+                                    <div class="container">
+                                    <div class="table-data__tool-right">
+                                  
+                             <a type="button" class="btn btn-danger btn-sm" href="{{ path("admin_categories_ajout") }}"><i class="zmdi zmdi-plus"></i>Add Categorie</a>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <th>ID</th>
+                                                <th>NAME</th>
+                                                <th>C-parent</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        {% for categorie in categories %}
+                                        <tbody>
+                                            <tr class="tr-shadow">
+                                                <td>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </td>
+                                                <td>{{ categorie.id }}</td>
+                                                <td class="desc">{{ categorie.name }}</td>
+                                               
+                                                <td>
+                                                    <span class="status--process">{{ categorie.parent }}</span>
+                                                </td>
+                                                
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        
+                                        
+                                                        <a href="{{ path("admin_categories_modif",{id:categorie.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                        <i class="zmdi zmdi-edit"></i>
+                                                        </a>
+        
+                                                       
+                                                      
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

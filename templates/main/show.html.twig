@@ -1,0 +1,206 @@
+{% extends 'baseNewC.html.twig' %}
+
+{% block title %}Show More{% endblock %}
+
+{% block body %}
+<!-- inner page section -->
+      <section class="inner_page_head">
+         <div class="container_fuild">
+            <div class="row">
+               <div class="col-md-12">
+                  
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end inner page section -->
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+      <!-- inner page section -->
+     <section class="product_section layout_padding">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2>
+                  Show <span>More</span>
+               </h2>
+      <!-- end inner page section -->
+      <!-- why section -->
+      <section class="why_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <div class="full">
+
+                  <div class="container bootstrap snippets bootdey">
+
+ <div class="panel-body">
+     <form class="form-horizontal" role="form">
+         <div class="profile-pic text-center">
+        
+                       {{annonce.image | raw}}
+                     
+         
+          </div>
+                       <br>    
+          <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+              <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
+			{{ annonce.title}}
+		    </h4><br>
+          <h5>{{ annonce.prix}} $</h5>
+		    <p class="mb-0"><br>
+			{{ annonce.content }}<br>
+		    </p><hr/>
+                    <div class="text-muted">
+			<small>
+				<div class="metadata"> Ecrit le {{ annonce.CreatedAt| date('d/m/y') }} 
+				à {{ annonce.createdAt | date('H:i') }} dans la categorie </div>
+			</small>
+		    </div>
+                 </div>
+            </div>
+        </form>
+        
+	<div class="cp_img">
+             <div class="hover">
+             <div ="container">
+
+
+              <section class="product_section layout_padding">
+
+          <div class="options">
+                           <a href="{{ path('addtest',{'id':annonce.id})}}" class="option1">
+                           Add To Chart
+                           </a>
+                           <a href="{{ path('contact')}}" class="option2">
+                           Contact Uss
+                           </a>
+                        </div>
+            
+            </div>
+            </section>
+
+             </div>
+              </div>
+         </div>
+      </div>
+</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end why section -->
+     
+
+
+
+
+
+     <!-- inner page section -->
+      <section class="product_section layout_padding">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2>
+                  Comments <span>Section</span>
+               </h2>
+            </div>
+      <!-- end inner page section -->
+      <!-- why section -->
+      <section class="why_section layout_padding">
+         <div class="container">
+         
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <div class="full">
+
+
+ 
+
+                     
+    <div class="heading_container remove_line_bt">
+                        <h4>
+                           List :
+                        </h4>
+                     </div>
+     <br><br>
+    {% for comment in annonce.comments %}
+    
+      {% if comment.parent != 0 %}
+       	<small> <p>---->Replied to comment numero {{ comment.parent }} </p>	</small>
+      
+       {% else %}
+       	<small><div>comment numero {{comment.id}}</div></small>
+      {% endif %}
+      
+      <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+              <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
+         <p>{{comment.content}}</p></h4>
+      
+      	<small>
+      <p>Publié par {{comment.nickname}} le {{comment.createdAt|date("d/m/Y H:i")}}</p>
+      
+      	</small>
+
+
+      <hr/>
+    {% endfor %}
+
+    <hr/>
+<div class="btn-box">
+               <a href="#ajout-commentaire" >
+               Reply
+               </a>
+            
+            </div></section>
+  </div>
+</div></div>
+ 
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section> </div>
+      </section>
+      <!-- end why section -->
+      
+
+
+<br><br>
+
+
+       <!-- inner page section -->
+      <section class="product_section layout_padding">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2 id="ajout-commentaire">
+                  Add <span>Comments</span>
+               </h2>
+            </div>
+      <!-- end inner page section -->
+      <!-- why section -->
+      <section class="why_section layout_padding">
+         <div class="container">
+         
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <div class="full">
+
+                    
+    {{form(commentForm)}}
+  
+
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      </div>
+      </section>
+      <!-- end why section -->
+      
+{% endblock %}

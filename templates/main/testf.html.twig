@@ -1,0 +1,73 @@
+{% extends 'baseNewS.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+<!-- inner page section -->
+      <section class="inner_page_head">
+         <div class="container_fuild">
+            <div class="row">
+               <div class="col-md-12">
+                  
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end inner page section -->
+      <!-- product section -->
+      <section class="product_section layout_padding">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2>
+                  Search <span> by </span>Title</span>
+               </h2>
+            </div>
+
+             <form class="au-form-icon--sm" action="" method="post">
+                                    <div class="full">
+                                   {{ form(form.title) }}
+                                   <div class="btn-box">
+                                    <button type="submit"><a>
+                                    Search</a>
+                                    </button>
+                                    </div>
+            
+                                    </div>
+                                </form>
+
+
+             
+		{% for annonce in annonces %}
+               <div class="col-sm-6 col-md-4 col-lg-3">
+                  <div class="box">
+                     <div class="option_container">
+                        <div class="options">
+                           <a href="{{ path('addtest',{'id':annonce.id})}}" class="option1">
+                           Add To Chart
+                           </a>
+                           <a href="{{ path('show',{'id':annonce.id})}}" class="option2">
+                           Show More
+                           </a>
+                        </div>
+                     </div>
+                     <div class="img-box">
+                        {{annonce.image | raw}}
+                     </div>
+                     <div class="detail-box">
+                        <h5>
+                           {{annonce.title}}
+                        </h5>
+                        <h6>
+                           ${{annonce.prix}}
+                        </h6>
+                     </div>
+                  </div>
+               </div>
+              
+               {% endfor %}
+            </div>
+         </div>
+      </section>
+      <!-- end product section -->
+
+{% endblock %}
